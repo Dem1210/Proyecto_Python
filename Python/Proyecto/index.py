@@ -30,8 +30,7 @@ class SistemaUsuarios:
     def agregar_usuario(self, usuario):
         self.usuarios.append(usuario)
         with open('usuarios.txt', 'a') as file:
-            file.write(f"{usuario.nombre},{usuario.apellido},{
-                       usuario.correo},{usuario.telefono}\n")
+            file.write(f"{usuario.nombre},{usuario.apellido},{ usuario.correo},{usuario.telefono}\n")
 
     def listar_usuarios(self):
         return self.usuarios
@@ -53,8 +52,7 @@ class SistemaUsuarios:
     def actualizar_archivo(self):
         with open('usuarios.txt', 'w') as file:
             for usuario in self.usuarios:
-                file.write(f"{usuario.nombre},{usuario.apellido},{
-                           usuario.correo},{usuario.telefono}\n")
+                file.write(f"{usuario.nombre},{usuario.apellido},{usuario.correo},{usuario.telefono}\n")
 
 
 class Interfaz(tk.Tk):
@@ -143,12 +141,10 @@ class Interfaz(tk.Tk):
         mensaje = f"Bienvenido, {usuario.nombre}! Gracias por registrarte."
         pywhatkit.sendwhatmsg_instantly(
             f"+{usuario.telefono}", mensaje.replace('"', '\"'), wait_time=10)
-        print(f"Mensaje enviado a {usuario.nombre} {
-              usuario.apellido} via WhatsApp.")
+        print(f"Mensaje enviado a {usuario.nombre} {usuario.apellido} via WhatsApp.")
 
     def listar_usuarios(self):
-        lista_usuarios = "\n".join([f"{usuario.nombre} {
-                                   usuario.apellido} - {usuario.correo}" for usuario in self.sistema.listar_usuarios()])
+        lista_usuarios = "\n".join([f"{usuario.nombre} { usuario.apellido} - {usuario.correo}" for usuario in self.sistema.listar_usuarios()])
         messagebox.showinfo("Lista de Usuarios", lista_usuarios)
 
     def buscar_usuario(self):
@@ -156,8 +152,7 @@ class Interfaz(tk.Tk):
             "Buscar Usuario", "Ingrese el correo del usuario:")
         usuario = self.sistema.buscar_usuario_por_correo(correo)
         if usuario:
-            messagebox.showinfo("Usuario Encontrado", f"Nombre: {usuario.nombre}\nApellido: {
-                                usuario.apellido}\nCorreo: {usuario.correo}\nTeléfono: {usuario.telefono}")
+            messagebox.showinfo("Usuario Encontrado", f"Nombre: {usuario.nombre}\nApellido: {usuario.apellido}\nCorreo: {usuario.correo}\nTeléfono: {usuario.telefono}")
         else:
             messagebox.showerror("Error", "Usuario no encontrado.")
 
