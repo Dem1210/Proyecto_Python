@@ -3,7 +3,7 @@ import re
 import tkinter as tk
 from tkinter import simpledialog
 from tkinter import messagebox
-import pywhatkit
+
 
 
 class Usuario:
@@ -16,6 +16,7 @@ class Usuario:
 
 class SistemaUsuarios:
     def __init__(self):
+
         self.usuarios = []
         self.cargar_usuarios()
 
@@ -33,6 +34,7 @@ class SistemaUsuarios:
             file.write(f"{usuario.nombre},{usuario.apellido},{ usuario.correo},{usuario.telefono}\n")
 
     def listar_usuarios(self):
+
         return self.usuarios
 
     def buscar_usuario_por_correo(self, correo):
@@ -137,11 +139,6 @@ class Interfaz(tk.Tk):
     def validar_correo(self, correo):
         return re.match(r"[^@]+@[^@]+\.[^@]+", correo)
 
-    def enviar_mensaje_bienvenida(self, usuario):
-        mensaje = f"Bienvenido, {usuario.nombre}! Gracias por registrarte."
-        pywhatkit.sendwhatmsg_instantly(
-            f"+{usuario.telefono}", mensaje.replace('"', '\"'), wait_time=10)
-        print(f"Mensaje enviado a {usuario.nombre} {usuario.apellido} via WhatsApp.")
 
     def listar_usuarios(self):
         lista_usuarios = "\n".join([f"{usuario.nombre} { usuario.apellido} - {usuario.correo}" for usuario in self.sistema.listar_usuarios()])
